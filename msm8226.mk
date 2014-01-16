@@ -53,7 +53,7 @@ PRODUCT_PACKAGES += \
     keystore.msm8226 \
     lights.MSM8226 \
     memtrack.msm8226 \
-    power.qcom
+    power.msm8226
 
 # Utilities
 PRODUCT_PACKAGES += \
@@ -132,7 +132,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     use.voice.path.for.pcm.voip=true \
     qcom.bt.le_dev_pwr_class=1 \
     ro.qc.sdk.audio.ssr=false \
-    persist.audio.fluence.voicecall=true
+    persist.audio.fluence.voicecall=true \
+    ro.qc.sdk.audio.fluencetype=fluence \
 
 # Misc
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -148,10 +149,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.fuse_sdcard=true \
     ro.crypto.fuse_sdcard=true \
     ro.nfc.port=I2C
-
-# QC Perf
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=/system/vendor/lib/libqc-opt.so
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
