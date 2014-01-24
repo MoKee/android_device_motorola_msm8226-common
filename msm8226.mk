@@ -134,6 +134,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.ssr=false \
     persist.audio.fluence.voicecall=true \
     ro.qc.sdk.audio.fluencetype=fluence \
+    audio.offload.buffer.size.kb=32 \
+    audio.offload.gapless.enabled=true \
+    av.offload.enable=true
 
 # Misc
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -164,5 +167,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # QCOM Display
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320
+
+# QC Perf
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=/system/vendor/lib/libqc-opt.so
 
 $(call inherit-product, device/motorola/qcom-common/qcom-common.mk)
