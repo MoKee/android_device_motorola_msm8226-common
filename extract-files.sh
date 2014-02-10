@@ -107,5 +107,5 @@ for FILE in `egrep -v '(^#|^$)' ../msm8226-common/common-proprietary-files.txt`;
     fi
 done
 
-echo "This is designed to extract files from an official cm-11.0 build"
+echo "This is designed to extract files from an official kk_mkt build"
 ../msm8226-common/setup-makefiles.sh
