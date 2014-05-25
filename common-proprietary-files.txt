@@ -1,5 +1,5 @@
 # App
-app/TimeService.apk
+-app/TimeService.apk
 
 # Bins
 bin/adsprpcd
@@ -62,8 +62,8 @@ etc/Headset_cal.acdb
 etc/Speaker_cal.acdb
 
 # Framework
-framework/qcnvitems.jar
-framework/qcrilhook.jar
+-framework/qcnvitems.jar
+-framework/qcrilhook.jar
 
 # HAL
 lib/hw/audio.primary.msm8226.so
@@ -156,7 +156,7 @@ vendor/lib/lib-rtpdaemoninterface.so
 vendor/lib/lib-rtpsl.so
 vendor/lib/libsensor1.so
 vendor/lib/libssd.so
-vendor/lib/libtime_genoff.so
+-vendor/lib/libtime_genoff.so
 vendor/lib/libTimeService.so
 vendor/lib/libthermalclient.so
 vendor/lib/libxml.so
@@ -178,49 +178,9 @@ lib/libchromatix_ar0543_default_video.so
 lib/libchromatix_ar0543_hfr_60.so
 lib/libchromatix_ar0543_preview.so
 lib/libchromatix_ar0543_snapshot.so
-lib/libchromatix_imx135_liveshot.so
-lib/libchromatix_imx135_video_hd.so
-lib/libchromatix_ov5693_common.so
-lib/libchromatix_ov5693_default_video.so
-lib/libchromatix_ov5693_preview.so
 lib/libmmcamera_ar0543.so
 lib/libmmcamera_interface.so
-lib/libmmcamera_ov5693.so
 lib/libmm-qcamera.so
-vendor/lib/libchromatix_imx135_common.so
-vendor/lib/libchromatix_imx135_default_video.so
-vendor/lib/libchromatix_imx135_hfr_120.so
-vendor/lib/libchromatix_imx135_preview.so
-vendor/lib/libchromatix_imx135_snapshot.so
-vendor/lib/libchromatix_ov8825_common.so
-vendor/lib/libchromatix_ov8825_default_video.so
-vendor/lib/libchromatix_ov8825_hfr_60fps.so
-vendor/lib/libchromatix_ov8825_hfr_90fps.so
-vendor/lib/libchromatix_ov8825_hfr_120fps.so
-vendor/lib/libchromatix_ov8825_liveshot.so
-vendor/lib/libchromatix_ov8825_liveshot_hd.so
-vendor/lib/libchromatix_ov8825_preview.so
-vendor/lib/libchromatix_ov8825_preview_hd.so
-vendor/lib/libchromatix_ov8825_snapshot.so
-vendor/lib/libchromatix_ov8825_snapshot_hd.so
-vendor/lib/libchromatix_ov8825_video_hd.so
-vendor/lib/libchromatix_ov8825_zsl.so
-vendor/lib/libchromatix_ov9724_common.so
-vendor/lib/libchromatix_ov9724_default_video.so
-vendor/lib/libchromatix_ov9724_liveshot.so
-vendor/lib/libchromatix_ov9724_preview.so
-vendor/lib/libchromatix_skuf_ov5648_p5v23c_common.so
-vendor/lib/libchromatix_skuf_ov5648_p5v23c_default_video.so
-vendor/lib/libchromatix_skuf_ov5648_p5v23c_preview.so
-vendor/lib/libchromatix_skuf_ov5648_p5v23c_snapshot.so
-vendor/lib/libchromatix_skuf_ov12830_p12v01c_common.so
-vendor/lib/libchromatix_skuf_ov12830_p12v01c_default_video.so
-vendor/lib/libchromatix_skuf_ov12830_p12v01c_hfr_60fps.so
-vendor/lib/libchromatix_skuf_ov12830_p12v01c_hfr_90fps.so
-vendor/lib/libchromatix_skuf_ov12830_p12v01c_preview.so
-vendor/lib/libchromatix_skuf_ov12830_p12v01c_snapshot.so
-vendor/lib/libchromatix_skuf_ov12830_p12v01c_video_hd.so
-vendor/lib/libchromatix_skuf_ov12830_p12v01c_zsl.so
 vendor/lib/libmmcamera2_c2d_module.so
 vendor/lib/libmmcamera2_cpp_module.so
 vendor/lib/libmmcamera2_iface_modules.so
@@ -235,19 +195,10 @@ vendor/lib/libmmcamera2_wnr_module.so
 vendor/lib/libmmcamera_faceproc.so
 vendor/lib/libmmcamera_hdr_gb_lib.so
 vendor/lib/libmmcamera_hdr_lib.so
-vendor/lib/libmmcamera_hi256.so
 vendor/lib/libmmcamera_imglib.so
-vendor/lib/libmmcamera_imx135.so
 vendor/lib/libmmcamera_mt9m114.so
-vendor/lib/libmmcamera_ov8825.so
-vendor/lib/libmmcamera_ov9724.so
-vendor/lib/libmmcamera_skuf_ov5648_p5v23c.so
-vendor/lib/libmmcamera_skuf_ov12830_p12v01c.so
 vendor/lib/libmmcamera_sp1628.so
-vendor/lib/libmmcamera_sunny_p5v23c_eeprom.so
-vendor/lib/libmmcamera_sunny_p12v01m_eeprom.so
 vendor/lib/libmmcamera_tintless_algo.so
-vendor/lib/libmmcamera_truly_cm7700_eeprom.so
 vendor/lib/libmmcamera_tuning.so
 vendor/lib/libmmcamera_wavelet_lib.so
 vendor/lib/liboemcamera.so
@@ -257,25 +208,23 @@ etc/firmware/a300_pfp.fw
 etc/firmware/a300_pm4.fw
 etc/firmware/a330_pfp.fw
 etc/firmware/a330_pm4.fw
-etc/firmware/leia_pfp_470.fw
-etc/firmware/leia_pm4_470.fw
 vendor/lib/egl/eglsubAndroid.so
 vendor/lib/egl/libEGL_adreno.so
 vendor/lib/egl/libGLESv1_CM_adreno.so
 vendor/lib/egl/libGLESv2_adreno.so
 vendor/lib/egl/libq3dtools_adreno.so
 vendor/lib/libadreno_utils.so
-vendor/lib/libc2d2_z180.so
 vendor/lib/libc2d30.so
 vendor/lib/libc2d30-a3xx.so
-vendor/lib/libc2d30-a4xx.so
 vendor/lib/libC2D2.so
 vendor/lib/libCB.so
 vendor/lib/libgsl.so
-vendor/lib/libllvm-a3xx.so
 vendor/lib/libllvm-qcom.so
 vendor/lib/libOpenCL.so
 vendor/lib/libOpenVG.so
+vendor/lib/librs_adreno_sha1.so
+vendor/lib/librs_adreno.so
+vendor/lib/libRSDriver_adreno.so
 vendor/lib/libsc-a3xx.so
 
 # Keystore
