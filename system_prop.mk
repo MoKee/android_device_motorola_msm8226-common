@@ -59,6 +59,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.gps.qc_nlp_in_use=1 \
     persist.loc.nlp_name=com.qualcomm.services.location
 
+# Media
+PRODUCT_PROPERTY_OVERRIDEs += \
+    media.stagefright.use-awesome=true
+
 # NITZ
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.rild.nitz_plmn="" \
@@ -74,7 +78,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Qualcomm
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true \
-    qcom.hw.aac.encoder=true \
     ro.qualcomm.cabl=0 \
     ro.vendor.extension_library=/system/vendor/lib/libqc-opt.so
 
@@ -87,10 +90,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.use_data_netmgrd=true
-
-# Recovery
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.forbid_format=/fsg,/firmware,/persist,/boot
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
