@@ -39,7 +39,7 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8226
 TARGET_NO_BOOTLOADER := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 vmalloc=400M utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags androidboot.write_protect=0 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 vmalloc=400M utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags androidboot.write_protect=0
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
@@ -116,6 +116,31 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 # SELinux
 -include device/qcom/sepolicy/sepolicy.mk
+
+BOARD_SEPOLICY_DIRS += \
+    device/motorola/msm8226-common/sepolicy
+
+BOARD_SEPOLICY_UNION += \
+    akmd8963.te \
+    atvc.te \
+    batt_health.te \
+    device.te \
+    file_contexts \
+    file.te \
+    init.te \
+    init_shell.te \
+    keystore.te \
+    mediaserver.te \
+    mm-pp-daemon.te \
+    mm-qcamerad.te \
+    mpdecision.te \
+    platform_app.te \
+    property_contexts \
+    property.te \
+    rild.te \
+    rmt_storage.te \
+    system_app.te \
+    thermal-engine.te
 
 # Vold
 BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
