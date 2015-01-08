@@ -4,7 +4,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.buffer.size.kb=32 \
     audio.offload.gapless.enabled=false \
     audio.offload.multiple.enabled=false \
-    audio.offload.pcm.enable=true
+    audio.offload.pcm.16bit.enable=true \
+    audio.offload.pcm.24bit.enable=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     av.offload.enable=false \
@@ -39,6 +40,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     qcom.bt.le_dev_pwr_class=1 \
     ro.bluetooth.hfp.ver=1.6 \
     ro.qualcomm.bt.hci_transport=smd
+
+# Camera
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
