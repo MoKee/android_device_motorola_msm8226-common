@@ -32,7 +32,6 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_MEMCPY_BASE_OPT_DISABLE := true
-TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := krait
 
 # Bootloader
@@ -60,6 +59,9 @@ BLUETOOTH_HCI_USE_MCT := true
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
+
+# Charger
+BOARD_CHARGING_MODE_BOOTING_LPM := /sys/mmi_lpm/lpm_mode
 
 # MKHW
 BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/mkhw/
