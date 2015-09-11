@@ -22,8 +22,6 @@ persist.audio.fluence.voicecall=true
 persist.audio.fluence.voicerec=false
 persist.audio.fluence.speaker=true
 
-ro.audio.monitorRotation=1
-
 ro.qc.sdk.audio.fluencetype=fluence
 ro.qc.sdk.audio.ssr=false
 
@@ -86,6 +84,9 @@ rild.libargs=-d /dev/smd0
 rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 
 ro.use_data_netmgrd=true
+
+# Scheduler
+sys.io.scheduler=fiops
 
 # Storage
 persist.sys.isUsbOtgEnabled=true
