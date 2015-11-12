@@ -91,6 +91,9 @@ sys.io.scheduler=bfq
 # Storage
 persist.sys.isUsbOtgEnabled=true
 
+# Strict Mode
+persist.sys.strictmode.disable=true
+
 # USB
 ro.usb.mtp=0x2e82
 ro.usb.mtp_adb=0x2e76
