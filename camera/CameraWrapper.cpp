@@ -145,7 +145,25 @@ static char *camera_fixup_getparams(int id, const char *settings)
 #endif
 
     if (id == BACK_CAMERA) {
-        params.set(CameraParameters::KEY_SUPPORTED_TOUCH_AF_AEC, "touch-on,touch-off");
+        params.set(CameraParameters::KEY_QC_SUPPORTED_TOUCH_AF_AEC, "touch-on,touch-off");
+    }
+
+    params.set(CameraParameters::KEY_QC_SUPPORTED_FACE_DETECTION, "on,off");
+
+    if (get_product_device() == FALCON || get_product_device() == PEREGRINE) {
+        if (id == BACK_CAMERA) {
+            params.set(CameraParameters::KEY_QC_SUPPORTED_ISO_MODES,
+                    "auto,ISO_HJR,ISO100,ISO200,ISO400,ISO800,ISO1600");
+        }
+    }
+
+    if (!(get_product_device() == FALCON || get_product_device() == PEREGRINE) ||
+            id == BACK_CAMERA) {
+        /* The FFC of falcon and peregrine doesn't support scene modes */
+        params.set(CameraParameters::KEY_SUPPORTED_SCENE_MODES,
+                "auto,action,portrait,landscape,night,night-portrait,theatre"
+                "candlelight,beach,snow,sunset,steadyphoto,fireworks,sports,party,"
+                "auto_hdr,hdr,asd,backlight,flowers,AR");
     }
 
 #if !LOG_NDEBUG
@@ -190,7 +208,7 @@ static char *camera_fixup_setparams(int id, const char *settings)
         const char *sceneMode = params.get(CameraParameters::KEY_SCENE_MODE);
         if (sceneMode != NULL) {
             if (!strcmp(sceneMode, CameraParameters::SCENE_MODE_HDR)) {
-                params.remove(CameraParameters::KEY_ZSL);
+                params.remove(CameraParameters::KEY_QC_ZSL);
             }
         }
     }
