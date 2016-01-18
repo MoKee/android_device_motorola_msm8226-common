@@ -174,7 +174,10 @@ static char *camera_fixup_getparams(int id, const char *settings)
     }
 
     /* HFR video recording workaround */
-    params.set(CameraParameters::KEY_QC_VIDEO_HIGH_FRAME_RATE, videoHfr);
+    const char *recordingHint = params.get(CameraParameters::KEY_RECORDING_HINT);
+    if (recordingHint && !strcmp(recordingHint, "true")) {
+        params.set(CameraParameters::KEY_QC_VIDEO_HIGH_FRAME_RATE, videoHfr);
+    }
 
 #if !LOG_NDEBUG
     ALOGV("%s: fixed parameters:", __FUNCTION__);
@@ -218,9 +221,6 @@ static char *camera_fixup_setparams(int id, const char *settings)
                     params.set(CameraParameters::KEY_PREVIEW_FPS_RANGE, "15000,30000");
                 }
             }
-        } else {
-            /* The HW detection causes a stream of errors, disable it. */
-            params.set(android::CameraParameters::KEY_MAX_NUM_DETECTED_FACES_HW, 0);
         }
     } else if (get_product_device() == TITAN || get_product_device() == THEA) {
         const char *sceneMode = params.get(CameraParameters::KEY_SCENE_MODE);
