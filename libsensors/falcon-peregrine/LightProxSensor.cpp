@@ -24,26 +24,21 @@
 LightProxSensor::LightProxSensor()
     : SensorBase(NULL, "light-prox"),
       mInputReader(4),
-      mPendingEventsMask(0),
-      mPendingEventsFlushMask(0)
+      mPendingEventsMask(0)
 {
     mEnabled[LIGHT] = false;
     mPendingEvents[LIGHT].version = sizeof(sensors_event_t);
     mPendingEvents[LIGHT].sensor = ID_L;
     mPendingEvents[LIGHT].type = SENSOR_TYPE_LIGHT;
     memset(mPendingEvents[LIGHT].data, 0, sizeof(mPendingEvents[LIGHT].data));
+    mPendingEventsFlushCount[LIGHT] = 0;
 
     mEnabled[PROX] = false;
     mPendingEvents[PROX].version = sizeof(sensors_event_t);
     mPendingEvents[PROX].sensor = ID_P;
     mPendingEvents[PROX].type = SENSOR_TYPE_PROXIMITY;
     memset(mPendingEvents[PROX].data, 0, sizeof(mPendingEvents[PROX].data));
-
-    mPendingEventsFlush.version = META_DATA_VERSION;
-    mPendingEventsFlush.sensor = 0;
-    mPendingEventsFlush.type = SENSOR_TYPE_META_DATA;
-    mPendingEventsFlush.reserved0 = 0;
-    mPendingEventsFlush.timestamp = 0;
+    mPendingEventsFlushCount[PROX] = 0;
 }
 
 LightProxSensor::~LightProxSensor()
@@ -87,16 +82,6 @@ int LightProxSensor::setDelay(int32_t handle, int64_t ns)
     return 0;
 }
 
-void LightProxSensor::setProxInitialState()
-{
-    struct input_absinfo absinfo;
-    if (!ioctl(data_fd, EVIOCGABS(EVENT_TYPE_PROXIMITY), &absinfo)) {
-        // make sure to report an event immediately
-        mProxHasPendingEvent = true;
-        mPendingEvents[PROX].distance = absinfo.value * ADJUST_PROX;
-    }
-}
-
 int LightProxSensor::enable(int32_t handle, int en)
 {
     char enable_path[PATH_MAX];
@@ -133,17 +118,10 @@ int LightProxSensor::enable(int32_t handle, int en)
         }
         close(fd);
         mEnabled[sensor] = enable;
-        if (sensor == PROX)
-            setProxInitialState();
         return 0;
     }
 
     return fd;
-}
-
-bool LightProxSensor::hasPendingEvents() const
-{
-    return mProxHasPendingEvent;
 }
 
 int LightProxSensor::readEvents(sensors_event_t* data, int count)
@@ -151,19 +129,30 @@ int LightProxSensor::readEvents(sensors_event_t* data, int count)
     if (count < 1)
         return -EINVAL;
 
-    if (mProxHasPendingEvent) {
-        mProxHasPendingEvent = false;
-        mPendingEvents[PROX].timestamp = getTimestamp();
-        *data = mPendingEvents[PROX];
-        return mEnabled[PROX] ? 1 : 0;
-    }
-
     ssize_t n = mInputReader.fill(data_fd);
     if (n < 0)
         return n;
 
     int numEventReceived = 0;
     input_event const* event;
+
+    for (int i = 0; i < NUM_SENSORS; i++) {
+        if (!count)
+            break;
+        if (!mPendingEventsFlushCount[i])
+            continue;
+        sensors_meta_data_event_t flushEvent;
+        flushEvent.version = META_DATA_VERSION;
+        flushEvent.type = SENSOR_TYPE_META_DATA;
+        flushEvent.meta_data.what = META_DATA_FLUSH_COMPLETE;
+        flushEvent.meta_data.sensor = mPendingEvents[i].sensor;
+        flushEvent.reserved0 = 0;
+        flushEvent.timestamp = getTimestamp();
+        *data++ = flushEvent;
+        mPendingEventsFlushCount[i]--;
+        count--;
+        numEventReceived++;
+    }
 
     while (count && mInputReader.readEvent(&event)) {
         int type = event->type;
@@ -193,15 +182,6 @@ int LightProxSensor::readEvents(sensors_event_t* data, int count)
                         count--;
                         numEventReceived++;
                     }
-
-                    if (mPendingEventsFlushMask & (1 << i)) {
-                        mPendingEventsFlushMask &= ~(1 << i);
-                        mPendingEventsFlush.meta_data.what = META_DATA_FLUSH_COMPLETE;
-                        mPendingEventsFlush.meta_data.sensor = i;
-                        *data++ = mPendingEventsFlush;
-                        count--;
-                        numEventReceived++;
-                     }
                 }
             }
         } else {
@@ -233,7 +213,7 @@ int LightProxSensor::flush(int handle)
     if (!mEnabled[id])
         return -EINVAL;
 
-    mPendingEventsFlushMask |= 1 << id;
+    mPendingEventsFlushCount[id]++;
 
     return 0;
 }

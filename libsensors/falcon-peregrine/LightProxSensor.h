@@ -33,17 +33,13 @@ private:
     bool mEnabled[NUM_SENSORS];
     InputEventCircularReader mInputReader;
     sensors_event_t mPendingEvents[NUM_SENSORS];
-    sensors_event_t mPendingEventsFlush;
     uint32_t mPendingEventsMask;
-    uint32_t mPendingEventsFlushMask;
-    bool mProxHasPendingEvent;
-    void setProxInitialState();
+    int mPendingEventsFlushCount[NUM_SENSORS];
 
 public:
             LightProxSensor();
     virtual ~LightProxSensor();
     virtual int readEvents(sensors_event_t* data, int count);
-    virtual bool hasPendingEvents() const;
     virtual int setDelay(int32_t handle, int64_t ns);
     virtual int enable(int32_t handle, int enabled);
     virtual int flush(int handle);
