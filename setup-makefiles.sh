@@ -21,9 +21,9 @@ set -e
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
-CM_ROOT="$MY_DIR"/../../..
+MK_ROOT="$MY_DIR"/../../..
 
-HELPER="$CM_ROOT"/vendor/cm/build/tools/extract_utils.sh
+HELPER="$MK_ROOT"/vendor/mk/build/tools/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
@@ -31,7 +31,7 @@ fi
 . "$HELPER"
 
 # Initialize the helper for common
-setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" "true" "$1"
+setup_vendor "$DEVICE_COMMON" "$VENDOR" "$MK_ROOT" "true" "$1"
 
 # Copyright headers and guards
 write_headers "falcon peregrine thea titan"
@@ -39,7 +39,7 @@ write_headers "falcon peregrine thea titan"
 # The standard common blobs
 write_makefiles "$MY_DIR"/proprietary-files.txt
 
-if [ -s "$CM_ROOT"/vendor/qcom/binaries/msm8974/graphics/graphics-vendor.mk ]; then
+if [ -s "$MK_ROOT"/vendor/qcom/binaries/msm8974/graphics/graphics-vendor.mk ]; then
     printf '\n%s\n' "\$(call inherit-product, vendor/qcom/binaries/msm8974/graphics/graphics-vendor.mk)" >> "$PRODUCTMK"
 else
     write_makefiles "$MY_DIR"/../../qcom/common/extractors/graphics-msm8974.txt
@@ -50,7 +50,7 @@ write_footers
 
 if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
     # Reinitialize the helper for device
-    setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" "false" "$1"
+    setup_vendor "$DEVICE" "$VENDOR" "$MK_ROOT" "false" "$1"
 
     # Copyright headers and guards
     write_headers
