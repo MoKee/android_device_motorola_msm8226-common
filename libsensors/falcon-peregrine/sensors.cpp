@@ -55,7 +55,6 @@ static struct sensor_t sSensorList[] = {
         .fifoMaxEventCount = 0,
         .stringType = SENSOR_STRING_TYPE_ACCELEROMETER,
         .requiredPermission = 0,
-        .maxDelay = (ACC_MAX_DELAY_MS * 1000),
         .flags = SENSOR_FLAG_CONTINUOUS_MODE,
         .reserved = {}
     },
@@ -68,7 +67,7 @@ static struct sensor_t sSensorList[] = {
         .maxRange = 2000,
         .resolution = 0.0625,
         .power = 6.800000190734863,
-        .minDelay = 20000,
+        .minDelay = (MAG_MIN_DELAY_NS / 1000),
         .fifoReservedEventCount = 0,
         .fifoMaxEventCount = 0,
         .stringType = SENSOR_STRING_TYPE_MAGNETIC_FIELD,

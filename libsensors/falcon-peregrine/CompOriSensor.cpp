@@ -77,7 +77,7 @@ int CompOriSensor::enable(int32_t handle, int en)
     if (enable == mEnabled[sensor])
         return 0;
 
-    fd = open(enable_path, O_RDWR);
+    fd = open(enable_path, O_WRONLY);
     if (fd < 0) {
         ALOGE("CompOriSensor: could not open %s: %d", enable_path, fd);
         return fd;
@@ -113,7 +113,10 @@ int CompOriSensor::setDelay(int32_t handle, int64_t ns)
         return -EINVAL;
     }
 
-    fd = open(delay_path, O_RDWR);
+    if (ns < MAG_MIN_DELAY_NS)
+        ns = MAG_MIN_DELAY_NS;
+
+    fd = open(delay_path, O_WRONLY);
     if (fd >= 0) {
         char buf[80];
         int ret;
